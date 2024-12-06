@@ -52,7 +52,9 @@ library(caret)
 Poniżej przedstawiono pierwsze 10 wierszy zbioru danych:
 ``` {r loading_data, cache = TRUE, echo = TRUE}
 battery_data <- read.csv("mp_batteries.csv", fileEncoding = "UTF-8")
-kable(head(battery_data, 10))
+kable(head(battery_data, 10), format = "html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = TRUE) %>%
+  scroll_box(width = "100%")
 ```
 
 ## Struktura zbioru danych
@@ -99,9 +101,9 @@ if (sum(missing_values$"Number of Missing Values") == 0){
 ```{r duplicates, cache=TRUE}
 duplicates <- battery_data[duplicated(battery_data$ColumnName), ]
 if (nrow(duplicates) == 0){
-  cat("#### W zbiorze nie ma duplikatów")
+  cat("W zbiorze nie ma duplikatów")
 } else {
-  cat("#### Duplikaty: ")
+  cat("Duplikaty: ")
   duplicates
 }
 ```
@@ -134,7 +136,9 @@ kable(data_summary)
 ``` {r basic_stats, cache = TRUE, results='asis'}
 numeric_cols <- battery_data[sapply(battery_data, is.numeric)]
 numeric_vars <- names(battery_data)[sapply(battery_data, is.numeric)]
-kable(summary(numeric_cols))
+kable(summary(numeric_cols), format = "html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = TRUE) %>%
+  scroll_box(width = "100%")
 
 ```
 
